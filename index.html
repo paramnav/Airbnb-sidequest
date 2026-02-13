@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Side Quests</title>
+    <style>
+        body { font-family: 'Courier New', Courier, monospace; background: #1a1a1a; color: #00ff41; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
+        .container { border: 2px solid #00ff41; padding: 2rem; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); max-width: 80%; }
+        h1 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        #quest-display { font-size: 1.2rem; margin: 2rem 0; min-height: 3em; color: white; font-style: italic; }
+        button { background: #00ff41; color: #1a1a1a; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; }
+        button:active { transform: scale(0.95); }
+        .secret-note { margin-top: 20px; font-size: 0.7rem; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Infiltrator Protocol</h1>
+        <p>Your secret objective awaits...</p>
+        
+        <div id="quest-display">Click the button to reveal your mission.</div>
+        
+        <button onclick="getQuest()">Get My Quest</button>
+        
+        <p class="secret-note">DO NOT SHOW THIS TO ANYONE. <br> CLOSE THE TAB ONCE MEMORIZED.</p>
+    </div>
+
+    <script>
+        const quests = [
+            "📸 THE FOODIE: You must take a photo of every meal before anyone starts eating.",
+            "🥤 THE HYDRATOR: Every time someone says the word 'Drink', you must loudly remind them to stay hydrated.",
+            "👟 THE ORGANIZER: Secretly align everyone's shoes in the hallway at least twice a day.",
+            "📝 THE CRITIC: Give a verbal 'Review' (out of 5 stars) for every room you enter for the first time today.",
+            "🤫 THE ECHO: Pick one person and, once an hour, repeat the last three words they said.",
+            "🎭 THE ACCENT: For exactly 10 minutes after dinner, you must speak in a subtle foreign accent without acknowledging it.",
+            "🔋 THE PLUG: Ensure at least one person's phone is charging at all times. If they unplug, find someone else's.",
+            "🎵 THE DJ: You must hum a famous movie theme song whenever there is more than 30 seconds of silence."
+        ];
+
+        function getQuest() {
+            const randomIndex = Math.floor(Math.random() * quests.length);
+            document.getElementById('quest-display').innerText = quests[randomIndex];
+            // Optional: Hide the button after click so they don't keep clicking
+            document.querySelector('button').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
