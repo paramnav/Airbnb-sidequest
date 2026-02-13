@@ -5,26 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airbnb Side Quests</title>
     <style>
-        body { font-family: 'Courier New', Courier, monospace; background: #1a1a1a; color: #00ff41; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; }
-        .container { border: 2px solid #00ff41; padding: 2rem; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); max-width: 80%; }
-        h1 { font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
-        #quest-display { font-size: 1.2rem; margin: 2rem 0; min-height: 3em; color: white; font-style: italic; }
-        button { background: #00ff41; color: #1a1a1a; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; }
-        button:active { transform: scale(0.95); }
-        .secret-note { margin-top: 20px; font-size: 0.7rem; opacity: 0.6; }
+        body { font-family: 'Courier New', Courier, monospace; background: #1a1a1a; color: #00ff41; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; text-align: center; overflow: hidden; }
+        .container { border: 2px solid #00ff41; padding: 2rem; border-radius: 15px; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); max-width: 85%; }
+        h1 { font-size: 1.4rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        #quest-display { font-size: 1.1rem; margin: 1.5rem 0; min-height: 4em; color: white; font-weight: bold; line-height: 1.4; }
+        button { background: #00ff41; color: #1a1a1a; border: none; padding: 15px 25px; font-weight: bold; cursor: pointer; border-radius: 5px; text-transform: uppercase; width: 100%; margin-top: 10px; }
+        button:active { transform: scale(0.98); opacity: 0.8; }
+        .secret-note { margin-top: 20px; font-size: 0.7rem; opacity: 0.5; letter-spacing: 1px; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Infiltrator Protocol</h1>
-        <p>Your secret objective awaits...</p>
+        <h1 id="title">Protocol: Side Quest</h1>
         
-        <div id="quest-display">Click the button to reveal your mission.</div>
+        <div id="quest-display">DO NOT CLICK UNLESS YOU ARE ALONE.</div>
         
-        <button onclick="getQuest()">Get My Quest</button>
+        <button id="get-btn" onclick="getQuest()">Retrieve Mission</button>
         
-        <p class="secret-note">DO NOT SHOW THIS TO ANYONE. <br> CLOSE THE TAB ONCE MEMORIZED.</p>
+        <button id="accept-btn" class="hidden" onclick="acceptMission()">Mission Accepted</button>
+        
+        <p id="footer-note" class="secret-note">YOUR COWARDS WILL NOT BE TOLERATED.<br>SCREENSHOT THIS NOW.</p>
     </div>
 
     <script>
@@ -32,18 +34,32 @@
             "📸 THE FOODIE: You must take a photo of every meal before anyone starts eating.",
             "🥤 THE HYDRATOR: Every time someone says the word 'Drink', you must loudly remind them to stay hydrated.",
             "👟 THE ORGANIZER: Secretly align everyone's shoes in the hallway at least twice a day.",
-            "📝 THE CRITIC: Give a verbal 'Review' (out of 5 stars) for every room you enter for the first time today.",
-            "🤫 THE ECHO: Pick one person and, once an hour, repeat the last three words they said.",
-            "🎭 THE ACCENT: For exactly 10 minutes after dinner, you must speak in a subtle foreign accent without acknowledging it.",
-            "🔋 THE PLUG: Ensure at least one person's phone is charging at all times. If they unplug, find someone else's.",
-            "🎵 THE DJ: You must hum a famous movie theme song whenever there is more than 30 seconds of silence."
+            "📝 THE CRITIC: Give a loud 5-star review for every room you enter for the first time.",
+            "🤫 THE ECHO: Pick one person and repeat the last three words they said once an hour.",
+            "✈️ THE NAPKIN ARCHITECT: Fold napkins into airplanes or fans during every meal.",
+            "📻 THE CLIPPER: End at least 5 sentences today with '...over and out.'",
+            "🦦 THE COMMENTATOR: Narrate someone's actions like a nature documentary for 30 seconds.",
+            "🔌 THE PLUG: Ensure at least one person's phone is charging at all times.",
+            "🕵️ THE LURKER: In group photos, face the wrong direction in the background.",
+            "💡 THE LIGHT SWITCHER: Turn off lights the second someone leaves a room.",
+            "🍷 THE GOURMET: Ask people if they 'taste the notes of oak' in their snacks.",
+            "📏 THE MEASURER: Measure furniture with your hands and nod solemnly.",
+            "👟 THE SHOE THIEF: Hide one person's left shoe in a different part of the house."
         ];
 
         function getQuest() {
             const randomIndex = Math.floor(Math.random() * quests.length);
             document.getElementById('quest-display').innerText = quests[randomIndex];
-            // Optional: Hide the button after click so they don't keep clicking
-            document.querySelector('button').style.display = 'none';
+            document.getElementById('get-btn').classList.add('hidden');
+            document.getElementById('accept-btn').classList.remove('hidden');
+            document.getElementById('footer-note').innerText = "SCREENSHOT NOW. THEN CLICK ACCEPT.";
+        }
+
+        function acceptMission() {
+            document.getElementById('quest-display').innerText = "MISSION SECURED. CLOSE THIS TAB.";
+            document.getElementById('accept-btn').classList.add('hidden');
+            document.getElementById('title').innerText = "STATUS: INFILTRATING";
+            document.getElementById('footer-note').innerText = "GOOD LUCK, AGENT.";
         }
     </script>
 </body>
